@@ -82,6 +82,10 @@ docker compose up -d
 DATABASE_URL="postgresql://reinaldo:algoritmohumano@localhost:5432/algoritmo_humano?schema=public"
 JWT_SECRET="chave_secreta"
 PORT=3001
+POSTGRES_USER=reinaldo
+POSTGRES_PASSWORD=algoritmohumano
+POSTGRES_DB=algoritmo_humano
+
 ```
 
 

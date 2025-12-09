@@ -8,9 +8,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: reinaldo
-      POSTGRES_PASSWORD: algoritmohumano
-      POSTGRES_DB: algoritmo_humano
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - algoritmo:/var/lib/postgresql/data
 
