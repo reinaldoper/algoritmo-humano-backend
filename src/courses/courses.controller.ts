@@ -11,9 +11,9 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
-import { CurrentUser } from 'src/auth/current-user.decorator';
+import { CurrentUser } from '../auth/current-user.decorator';
 
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';

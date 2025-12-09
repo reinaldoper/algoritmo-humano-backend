@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';

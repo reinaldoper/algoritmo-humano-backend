@@ -4,7 +4,7 @@ import { LoginDto } from './dto/login.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import express from 'express';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 
 @ApiTags('Auth')
 @Controller('auth')

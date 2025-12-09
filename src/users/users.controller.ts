@@ -8,9 +8,9 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ApiResponse } from '@nestjs/swagger';
-import { CurrentUser } from 'src/auth/current-user.decorator';
+import { CurrentUser } from '../auth/current-user.decorator';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
 
