@@ -358,3 +358,38 @@ Aqui está seu conteúdo formatado em Markdown organizado e legível:
 
 ### ➤ GET `/courses`
 ✔ Lista todos os cursos (requer autenticação)  
+
+---------------------
+me ajude a resolver isso: A propriedade 'mockResolvedValue' não existe no tipo '<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<DefaultArgs>>) => Prisma__UserClient<GetFindResult<$UserPayload<DefaultArgs>, T, PrismaClientOptions> | null, null, DefaultArgs, PrismaClientOptions>'.ts(2339)
+Esse erro acontece porque você está tentando usar mockResolvedValue diretamente em um método real do Prisma, e não em um mock. O TypeScript está certo: o método real prisma.user.findUnique não é um mock, então ele não tem mockResolvedValue.
+
+A solução é simples: garantir que o PrismaService seja mockado corretamente, e que os métodos (findUnique, create, etc.) sejam funções mockadas do Jest.
+
+Vamos resolver isso de forma limpa e definitiva.
+
+✅ ✅ Causa do erro
+Você provavelmente tem algo assim no teste:
+
+ts
+prisma.user.findUnique.mockResolvedValue(...)
+Mas prisma.user.findUnique não é um mock — é o método real do Prisma.
+
+✅ ✅ Solução: mockar o PrismaService corretamente
+Você precisa substituir o PrismaService por um objeto mockado:
+
+ts
+const prismaMock = {
+  user: {
+    findUnique: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+  },
+};
+E registrar isso no módulo de testes:
+
+ts
+providers: [
+  UsersService,
+  { provide: PrismaService, useValue: prismaMock },
+],
