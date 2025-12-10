@@ -1,11 +1,12 @@
-import { IsBoolean, IsString, IsUrl, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsBoolean, IsOptional, IsString, Length } from 'class-validator';
 
 export class UpdateCourseDto {
   @ApiProperty({
     example: 'Introduction to NestJS',
     description: 'Course title',
   })
+  @IsOptional()
   @IsString()
   @Length(3, 100)
   title?: string;
@@ -15,6 +16,7 @@ export class UpdateCourseDto {
       'Complete NestJS course covering fundamentals and advanced practices.',
     description: 'Detailed course description',
   })
+  @IsOptional()
   @IsString()
   @Length(10, 500)
   description?: string;
@@ -23,6 +25,7 @@ export class UpdateCourseDto {
     example: '3 hours',
     description: 'Total course duration (format is flexible)',
   })
+  @IsOptional()
   @IsString()
   duration?: string;
 
@@ -30,7 +33,8 @@ export class UpdateCourseDto {
     example: 'https://mysite.com/images/nestjs.png',
     description: 'URL for the course image',
   })
-  @IsUrl()
+  @IsOptional()
+  @IsString()
   imageUrl?: string;
 
   @ApiProperty({
@@ -38,6 +42,7 @@ export class UpdateCourseDto {
     description: 'Indicates whether the course is active or not',
     default: true,
   })
+  @IsOptional()
   @IsBoolean()
   status?: boolean;
 }

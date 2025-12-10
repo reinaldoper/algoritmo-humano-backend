@@ -1,4 +1,4 @@
-import { IsBoolean, IsString, IsUrl, Length } from 'class-validator';
+import { IsBoolean, IsString, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCourseDto {
@@ -30,7 +30,7 @@ export class CreateCourseDto {
     example: 'https://mysite.com/images/nestjs.png',
     description: 'URL for the course image',
   })
-  @IsUrl()
+  @IsString()
   imageUrl: string;
 
   @ApiProperty({

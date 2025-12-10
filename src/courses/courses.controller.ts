@@ -41,7 +41,7 @@ export class CoursesController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch()
+  @Patch(':id')
   @HttpCode(200)
   @ApiOperation({ summary: 'Update an existing course' })
   @ApiResponse({ status: 200, description: 'Course updated successfully.' })
@@ -49,11 +49,12 @@ export class CoursesController {
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiResponse({ status: 500, description: 'Server error.' })
-  async updateCourse(
-    @CurrentUser() user: { userId: number },
-    @Body() dto: UpdateCourseDto,
-  ) {
-    return this.coursesService.updateCourse(user.userId, dto);
+  async updateCourse(@Param('id') id: string, @Body() dto: UpdateCourseDto) {
+    if (!id || isNaN(Number(id))) {
+      throw new BadRequestException('Invalid course ID');
+    }
+    console.log(dto);
+    return this.coursesService.updateCourse(Number(id), dto);
   }
 
   @UseGuards(JwtAuthGuard)

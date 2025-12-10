@@ -42,7 +42,7 @@ export class UsersService {
   async findUser(email: string) {
     return this.prisma.user.findUnique({
       where: { email },
-      select: { id: true, email: true, name: true },
+      select: { id: true, email: true, name: true, createdAt: true },
     });
   }
 
@@ -50,7 +50,7 @@ export class UsersService {
     try {
       const user = await this.prisma.user.findUnique({
         where: { id },
-        select: { id: true, email: true, name: true, courses: true },
+        select: { id: true, email: true, name: true, createdAt: true },
       });
 
       if (!user) {
