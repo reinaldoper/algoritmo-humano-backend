@@ -393,3 +393,38 @@ providers: [
   UsersService,
   { provide: PrismaService, useValue: prismaMock },
 ],
+
+-----------------
+esse erro no seed? O argumento do tipo '{ name: string; email: string; password: string; createdAt: Date; id: number; }' não é atribuível ao parâmetro do tipo 'never'.ts(2345) ⚠ Error (TS2345) | O argumento do tipo { name: string; email: string; password: string; createdAt: Date; id: number; } não é atribuível ao parâmetro do tipo never . Windsurf: Explain Problem const user: { name: string; email: string; password: string; createdAt: Date; id: number; }
+Esse erro acontece porque no seed você provavelmente está tentando passar um objeto inteiro (com id, createdAt etc.) para o prisma.user.create() ou para um array tipado incorretamente.
+
+O prisma.user.create() espera apenas os campos mutáveis definidos no data, e não aceita id ou createdAt porque esses são gerados automaticamente pelo Prisma. Se você monta um array tipado errado, o TypeScript infere never e reclama.
+
+✅ Como corrigir
+No seed, crie o usuário assim:
+
+ts
+const user = await prisma.user.create({
+  data: {
+    name: `Usuário ${i}`,
+    email: `user${i}@example.com`,
+    password: hashedPassword,
+    // não precisa passar id nem createdAt
+  },
+});
+E se você quiser guardar os usuários em um array, tipa corretamente:
+
+ts
+const users: { id: number; name: string; email: string; password: string; createdAt: Date }[] = [];
+
+for (let i = 1; i <= 5; i++) {
+  const hashedPassword = await bcrypt.hash(`password${i}`, 10);
+  const user = await prisma.user.create({
+    data: {
+      name: `Usuário ${i}`,
+      email: `user${i}@example.com`,
+      password: hashedPassword,
+    },
+  });
+  users.push(user); // aqui o tipo bate certinho
+}

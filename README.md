@@ -89,9 +89,11 @@ POSTGRES_DB=algoritmo_humano
 ```
 
 
-### 5. Rodar as migrações do Prisma
+### 5. Rodar as migrações do Prisma e popula o banco de dados com alguns usuarios e cursos cadastrados.
 ```bash
 npx prisma migrate dev
+
+npm run seed
 ```
 
 ### 6. Iniciar o servidor
