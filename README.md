@@ -1,6 +1,6 @@
 # Projeto Algoritmo Humano — Backend (NestJS + Prisma + JWT)
  
-A API contempla autenticação, gestão de usuários e gestão de cursos, utilizando boas práticas REST e documentação via Swagger.
+A API contempla autenticação, gestão de usuários e gestão de cursos, utilizando boas práticas REST e documentação via Swagger. Usuário logado é salvo no cookie da sessão.
 
 ---
 
