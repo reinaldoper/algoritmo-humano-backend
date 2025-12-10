@@ -164,7 +164,7 @@ access_token
 
 ---
 
-### ➤ PATCH `/courses`
+### ➤ PATCH `/courses/:id`
 ✔ Atualiza informações de um curso  
 
 ---
