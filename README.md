@@ -214,3 +214,13 @@ http://localhost:3001/api/docs
 ```bash
 http://localhost:3001/api
 ```
+
+---
+
+
+### Testar a aplicação:
+```bash
+npm run test
+
+npm run test:cov
+```
