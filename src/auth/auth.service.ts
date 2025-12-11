@@ -22,12 +22,12 @@ export class AuthService {
     try {
       const user = await this.prisma.user.findUnique({ where: { email } });
       if (!user) {
-        throw new NotFoundException('User not found');
+        throw new NotFoundException('Usuário não encontrado');
       }
       const passwordMatches =
         user && (await bcrypt.compare(password, user.password));
       if (!passwordMatches) {
-        throw new UnauthorizedException('Invalid credentials');
+        throw new UnauthorizedException('Credenciais inválidas');
       }
       if (user && passwordMatches) {
         return user;
@@ -40,7 +40,7 @@ export class AuthService {
       ) {
         throw error;
       }
-      throw new InternalServerErrorException('Internal server error');
+      throw new InternalServerErrorException('Erro interno do servidor');
     }
   }
 

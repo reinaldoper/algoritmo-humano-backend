@@ -16,7 +16,7 @@ export class UsersService {
   async createUser(dto: CreateUserDto) {
     const user = await this.findUser(dto.email);
     if (user) {
-      throw new ConflictException('Email already registered');
+      throw new ConflictException('E-mail já registrado');
     }
     try {
       dto.password = await bcrypt.hash(dto.password, 10);
@@ -34,7 +34,7 @@ export class UsersService {
       });
     } catch (error) {
       if (error instanceof InternalServerErrorException) {
-        throw new InternalServerErrorException('Internal server error');
+        throw new InternalServerErrorException('Erro interno no servidor');
       }
     }
   }
@@ -54,7 +54,7 @@ export class UsersService {
       });
 
       if (!user) {
-        throw new NotFoundException('User not found');
+        throw new NotFoundException('Usuário não encontrado');
       }
 
       return user;
@@ -62,7 +62,7 @@ export class UsersService {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Internal server error');
+      throw new InternalServerErrorException('Erro interno no servidor');
     }
   }
 

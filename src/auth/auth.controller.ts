@@ -6,7 +6,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import express from 'express';
 import { UsersService } from '../users/users.service';
 
-@ApiTags('Auth')
+@ApiTags('Autenticação')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -17,10 +17,10 @@ export class AuthController {
   @Post('login')
   @HttpCode(200)
   @ApiOperation({ summary: 'Login' })
-  @ApiResponse({ status: 200, description: 'Login successful' })
-  @ApiResponse({ status: 401, description: 'Invalid credentials' })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiResponse({ status: 200, description: 'Login realizado com sucesso' })
+  @ApiResponse({ status: 401, description: 'Credenciais inválidas' })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+  @ApiResponse({ status: 500, description: 'Erro interno no servidor' })
   async login(
     @Body() loginDto: LoginDto,
     @Res({ passthrough: true }) res: express.Response,
@@ -38,7 +38,7 @@ export class AuthController {
       });
 
       return {
-        message: 'Login successful',
+        message: 'Login realizado com sucesso',
         access_token: token,
       };
     }
@@ -48,7 +48,7 @@ export class AuthController {
   @Post('logout')
   @HttpCode(204)
   @ApiOperation({ summary: 'Logout' })
-  @ApiResponse({ status: 204, description: 'User logged out' })
+  @ApiResponse({ status: 204, description: 'Usuário desconectado' })
   logout(@Res({ passthrough: true }) res: express.Response) {
     res.clearCookie('access_token');
     return;
@@ -56,10 +56,10 @@ export class AuthController {
 
   @Post('register')
   @HttpCode(201)
-  @ApiOperation({ summary: 'Register new user' })
-  @ApiResponse({ status: 201, description: 'User registered successfully' })
-  @ApiResponse({ status: 409, description: 'User already exists' })
-  @ApiResponse({ status: 400, description: 'Invalid payload' })
+  @ApiOperation({ summary: 'Registrar novo usuário' })
+  @ApiResponse({ status: 201, description: 'Usuário registrado com sucesso' })
+  @ApiResponse({ status: 409, description: 'Usuário já existe' })
+  @ApiResponse({ status: 400, description: 'Dados inválidos' })
   async register(@Body() dto: CreateUserDto) {
     return this.usersService.createUser(dto);
   }

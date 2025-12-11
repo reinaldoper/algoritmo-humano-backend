@@ -9,12 +9,11 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CurrentUser } from '../auth/current-user.decorator';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@ApiTags('Users')
+@ApiTags('Usuários')
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
@@ -22,18 +21,18 @@ export class UsersController {
 
   @Get('me')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Get logged user information' })
+  @ApiOperation({ summary: 'Obter informações do usuário logado' })
   @ApiResponse({
     status: 200,
-    description: 'User found successfully',
+    description: 'Usuário encontrado com sucesso',
   })
   @ApiResponse({
     status: 401,
-    description: 'Unauthorized',
+    description: 'Não autorizado',
   })
   @ApiResponse({
     status: 404,
-    description: 'User not found',
+    description: 'Usuário não encontrado',
   })
   async getProfile(@CurrentUser() user: { userId: number }) {
     return this.usersService.findUserById(user.userId);
@@ -41,18 +40,18 @@ export class UsersController {
 
   @Put('me')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Update logged user information' })
+  @ApiOperation({ summary: 'Atualizar informações do usuário logado' })
   @ApiResponse({
     status: 200,
-    description: 'User updated successfully',
+    description: 'Usuário atualizado com sucesso',
   })
   @ApiResponse({
     status: 401,
-    description: 'Unauthorized',
+    description: 'Não autorizado',
   })
   @ApiResponse({
     status: 404,
-    description: 'User not found',
+    description: 'Usuário não encontrado',
   })
   async updateProfile(
     @Body() dto: UpdateUserDto,
@@ -63,18 +62,18 @@ export class UsersController {
 
   @Delete('me')
   @HttpCode(204)
-  @ApiOperation({ summary: 'Delete logged user profile' })
+  @ApiOperation({ summary: 'Excluir perfil do usuário logado' })
   @ApiResponse({
     status: 204,
-    description: 'User deleted successfully — no content returned',
+    description: 'Usuário excluído com sucesso — nenhum conteúdo retornado',
   })
   @ApiResponse({
     status: 401,
-    description: 'Unauthorized',
+    description: 'Não autorizado',
   })
   @ApiResponse({
     status: 404,
-    description: 'User not found',
+    description: 'Usuário não encontrado',
   })
   async deleteProfile(@CurrentUser() user: { userId: number }) {
     await this.usersService.deleteUser(user.userId);

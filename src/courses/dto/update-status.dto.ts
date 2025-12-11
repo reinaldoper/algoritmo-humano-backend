@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class UpdateStatusDto {
   @ApiProperty({
     example: true,
-    description: 'Indicates whether the course is active or not',
+    description: 'Indica se o curso está ativo ou não',
     default: true,
   })
   @IsBoolean()

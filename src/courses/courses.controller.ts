@@ -19,7 +19,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 
-@ApiTags('Courses')
+@ApiTags('Cursos')
 @Controller('courses')
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
@@ -27,12 +27,12 @@ export class CoursesController {
   @UseGuards(JwtAuthGuard)
   @Post()
   @HttpCode(201)
-  @ApiOperation({ summary: 'Create a new course' })
-  @ApiResponse({ status: 201, description: 'Course created successfully.' })
-  @ApiResponse({ status: 400, description: 'Invalid request.' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiResponse({ status: 500, description: 'Server error.' })
+  @ApiOperation({ summary: 'Criar um novo curso' })
+  @ApiResponse({ status: 201, description: 'Curso criado com sucesso.' })
+  @ApiResponse({ status: 400, description: 'Requisição inválida.' })
+  @ApiResponse({ status: 401, description: 'Não autorizado.' })
+  @ApiResponse({ status: 403, description: 'Proibido.' })
+  @ApiResponse({ status: 500, description: 'Erro interno no servidor.' })
   async createCourse(
     @CurrentUser() user: { userId: number },
     @Body() dto: CreateCourseDto,
@@ -43,15 +43,15 @@ export class CoursesController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Update an existing course' })
-  @ApiResponse({ status: 200, description: 'Course updated successfully.' })
-  @ApiResponse({ status: 400, description: 'Invalid request.' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiResponse({ status: 500, description: 'Server error.' })
+  @ApiOperation({ summary: 'Atualizar um curso existente' })
+  @ApiResponse({ status: 200, description: 'Curso atualizado com sucesso.' })
+  @ApiResponse({ status: 400, description: 'Requisição inválida.' })
+  @ApiResponse({ status: 401, description: 'Não autorizado.' })
+  @ApiResponse({ status: 403, description: 'Proibido.' })
+  @ApiResponse({ status: 500, description: 'Erro interno no servidor.' })
   async updateCourse(@Param('id') id: string, @Body() dto: UpdateCourseDto) {
     if (!id || isNaN(Number(id))) {
-      throw new BadRequestException('Invalid course ID');
+      throw new BadRequestException('ID do curso inválido');
     }
     console.log(dto);
     return this.coursesService.updateCourse(Number(id), dto);
@@ -60,16 +60,16 @@ export class CoursesController {
   @UseGuards(JwtAuthGuard)
   @Get()
   @HttpCode(200)
-  @ApiOperation({ summary: 'List all courses' })
-  @ApiResponse({ status: 200, description: 'Courses found.' })
+  @ApiOperation({ summary: 'Listar todos os cursos' })
+  @ApiResponse({ status: 200, description: 'Cursos encontrados.' })
   async getAllCourses() {
     return this.coursesService.getAllCourses();
   }
 
   @Get('/published')
   @HttpCode(200)
-  @ApiOperation({ summary: 'List all published courses' })
-  @ApiResponse({ status: 200, description: 'Published courses found.' })
+  @ApiOperation({ summary: 'Listar todos os cursos publicados' })
+  @ApiResponse({ status: 200, description: 'Cursos publicados encontrados.' })
   async getPublishedCourses() {
     return this.coursesService.getPublishedCourses();
   }
@@ -77,8 +77,8 @@ export class CoursesController {
   @UseGuards(JwtAuthGuard)
   @Get('/me')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Get logged user courses' })
-  @ApiResponse({ status: 200, description: 'User courses found.' })
+  @ApiOperation({ summary: 'Listar cursos do usuário logado' })
+  @ApiResponse({ status: 200, description: 'Cursos do usuário encontrados.' })
   async getMyCourses(@CurrentUser() user: { userId: number }) {
     return this.coursesService.getCoursesByUserId(user.userId);
   }
@@ -86,14 +86,14 @@ export class CoursesController {
   @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   @HttpCode(204)
-  @ApiOperation({ summary: 'Delete a course' })
-  @ApiResponse({ status: 204, description: 'Course deleted successfully.' })
-  @ApiResponse({ status: 400, description: 'Invalid course ID.' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 404, description: 'Course not found.' })
+  @ApiOperation({ summary: 'Excluir um curso' })
+  @ApiResponse({ status: 204, description: 'Curso excluído com sucesso.' })
+  @ApiResponse({ status: 400, description: 'ID do curso inválido.' })
+  @ApiResponse({ status: 401, description: 'Não autorizado.' })
+  @ApiResponse({ status: 404, description: 'Curso não encontrado.' })
   async deleteCourse(@Param('id') id: string) {
     if (!id || isNaN(Number(id))) {
-      throw new BadRequestException('Invalid course ID');
+      throw new BadRequestException('ID do curso inválido');
     }
     await this.coursesService.deleteCourse(Number(id));
     return;
@@ -102,14 +102,14 @@ export class CoursesController {
   @UseGuards(JwtAuthGuard)
   @Patch(':id/status')
   @HttpCode(200)
-  @ApiOperation({ summary: 'Update course status' })
-  @ApiResponse({ status: 200, description: 'Status updated successfully.' })
-  @ApiResponse({ status: 400, description: 'Invalid data.' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 404, description: 'Course not found.' })
+  @ApiOperation({ summary: 'Atualizar status do curso' })
+  @ApiResponse({ status: 200, description: 'Status atualizado com sucesso.' })
+  @ApiResponse({ status: 400, description: 'Dados inválidos.' })
+  @ApiResponse({ status: 401, description: 'Não autorizado.' })
+  @ApiResponse({ status: 404, description: 'Curso não encontrado.' })
   async updateStatus(@Param('id') id: string, @Body() dto: UpdateStatusDto) {
     if (!id || isNaN(Number(id))) {
-      throw new BadRequestException('Invalid course ID');
+      throw new BadRequestException('ID do curso inválido');
     }
     return this.coursesService.updateStatus(Number(id), dto);
   }

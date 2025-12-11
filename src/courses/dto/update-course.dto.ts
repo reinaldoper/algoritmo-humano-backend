@@ -3,8 +3,8 @@ import { IsBoolean, IsOptional, IsString, Length } from 'class-validator';
 
 export class UpdateCourseDto {
   @ApiProperty({
-    example: 'Introduction to NestJS',
-    description: 'Course title',
+    example: 'Introdução ao NestJS',
+    description: 'Título do curso',
   })
   @IsOptional()
   @IsString()
@@ -13,8 +13,8 @@ export class UpdateCourseDto {
 
   @ApiProperty({
     example:
-      'Complete NestJS course covering fundamentals and advanced practices.',
-    description: 'Detailed course description',
+      'Curso completo de NestJS cobrindo fundamentos e práticas avançadas.',
+    description: 'Descrição detalhada do curso',
   })
   @IsOptional()
   @IsString()
@@ -22,16 +22,16 @@ export class UpdateCourseDto {
   description?: string;
 
   @ApiProperty({
-    example: '3 hours',
-    description: 'Total course duration (format is flexible)',
+    example: '3 horas',
+    description: 'Duração total do curso (formato flexível)',
   })
   @IsOptional()
   @IsString()
   duration?: string;
 
   @ApiProperty({
-    example: 'https://mysite.com/images/nestjs.png',
-    description: 'URL for the course image',
+    example: 'https://meusite.com/imagens/nestjs.png',
+    description: 'Salvar imagem na base64',
   })
   @IsOptional()
   @IsString()
@@ -39,7 +39,7 @@ export class UpdateCourseDto {
 
   @ApiProperty({
     example: true,
-    description: 'Indicates whether the course is active or not',
+    description: 'Indica se o curso está ativo ou não',
     default: true,
   })
   @IsOptional()

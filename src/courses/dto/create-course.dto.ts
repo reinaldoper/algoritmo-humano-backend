@@ -3,17 +3,16 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCourseDto {
   @ApiProperty({
-    example: 'Introduction to NestJS',
-    description: 'Course title',
+    example: 'Introdução ao NestJs',
+    description: 'Titulo do Curso.',
   })
   @IsString()
   @Length(3, 100)
   title: string;
 
   @ApiProperty({
-    example:
-      'Complete NestJS course covering fundamentals and advanced practices.',
-    description: 'Detailed course description',
+    example: 'Curso completo de NestJs',
+    description: 'Descrição detalhada do curso',
   })
   @IsString()
   @Length(10, 500)
@@ -21,21 +20,21 @@ export class CreateCourseDto {
 
   @ApiProperty({
     example: '3 hours',
-    description: 'Total course duration (format is flexible)',
+    description: 'Horas total do curso',
   })
   @IsString()
   duration: string;
 
   @ApiProperty({
     example: 'https://mysite.com/images/nestjs.png',
-    description: 'URL for the course image',
+    description: 'Salvar em formato base64',
   })
   @IsString()
   imageUrl: string;
 
   @ApiProperty({
     example: true,
-    description: 'Indicates whether the course is active or not',
+    description: 'Indica se o curso esta ativo ou não',
     default: true,
   })
   @IsBoolean()

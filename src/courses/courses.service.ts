@@ -27,7 +27,7 @@ export class CoursesService {
       });
     } catch (error) {
       if (error instanceof InternalServerErrorException) {
-        throw new InternalServerErrorException('Internal server error');
+        throw new InternalServerErrorException('Erro interno no servidor');
       }
     }
   }
@@ -60,7 +60,7 @@ export class CoursesService {
       },
     });
     if (!existCourse) {
-      throw new NotFoundException('Course not found');
+      throw new NotFoundException('Curso não encontrado');
     }
     return existCourse;
   }
