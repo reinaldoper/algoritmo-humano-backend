@@ -8,7 +8,7 @@
   "scripts": {
     "seed": "ts-node prisma/seed.ts",
     "clear:courses": "ts-node prisma/clearCourses.ts",
-    "build": "nest build",
+    "build": "npm install -g @nestjs/cli && prisma generate --schema=./prisma/schema.prisma && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
