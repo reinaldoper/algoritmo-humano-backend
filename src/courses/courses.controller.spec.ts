@@ -114,8 +114,6 @@ describe('CoursesController', () => {
     expect(result).toBeUndefined();
     expect(service.deleteCourse).toHaveBeenCalledWith(1);
   });
-
-  // ✅ deleteCourse (invalid id)
   it('should throw BadRequestException for invalid delete id', async () => {
     await expect(controller.deleteCourse('abc')).rejects.toThrow(
       BadRequestException,
